@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;900&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" href="favicon/favicon-32x32.png" type="image/x-icon">
+        <link rel="stylesheet" href="css/style.css">
+        <title>Banco Gama Air Force - Lista de Contas</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+
+            <ul class="topnav">
+                <li><img class="logomenu" src="imagens/logo.png" alt="" srcset="" width="50px"></li>
+                <li><a href="index.html">Cadastro</a></li>
+                <li><a href="consulta.html">Consultar conta</a></li>
+                <li><a class="active" href="listcontas.html">Lista de Contas</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Consulta de contas</h1>
+        <br />
+        <table>
+            <thead>
+                <tr>
+                    <th>Número ID</th>
+               <!--     <th>Titular</th>-->
+                    <th>Agência</th>
+                    <th>Conta</th>
+                    <th>Tipo</th>
+                    <th>Saldo</th>
+                  <!--  <th>CPF</th>
+                    <th>Celular</th>
+                    <th>Email</th>-->
+                </tr>
+                <tbody id="tabcad">
+
+                </tbody>
+            </thead>
+        </table>
+    </div>
+</body>
+<video autoplay muted loop class="myVideo">
+    <source src="video/planodefundo.mp4" type="video/mp4">
+  </video>
+
+<script type="text/javascript">
+    //Sua URL
+    var url = "http://localhost:8080/contas";
+
+    // Criando o objeto apartir da classe responsável por pegar os dados
+    var xhttp = new XMLHttpRequest();
+    // Chamando o método de configuração, para passar o tipo de requisicao(aqui é GET) e a url
+    xhttp.open("GET", url, true);
+
+    // Esta é uma função assíncrona, que é caracteristico do JavaScript
+    //Função a ser chamada quando a requisição retornar do servidor
+    xhttp.onreadystatechange = function() {
+            //Verifica se o retorno do servidor deu certo
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                console.log(xhttp.responseText);
+                var resposta = JSON.parse(xhttp.responseText)
+                for (var i = 0; i < resposta.length; i++) {
+                    let conta = document.createElement("tr");
+
+                    let numero = document.createElement("td");
+                //    let titular = document.createElement("td");
+                    let agencia = document.createElement("td");
+                    let numconta = document.createElement("td");
+                    let tipo = document.createElement("td");
+                    let saldo = document.createElement("td");
+                //    let cpf = document.createElement("td");
+                //    let telefone = document.createElement("td");
+                //    let email = document.createElement("td");
+
+                    conta.appendChild(numero);
+                //    conta.appendChild(titular);
+                    conta.appendChild(agencia);
+                    conta.appendChild(numconta);
+                    conta.appendChild(tipo);
+                    conta.appendChild(saldo);
+                //    conta.appendChild(cpf);
+                //    conta.appendChild(telefone);
+                //    conta.appendChild(email);
+
+
+                    numero.textContent = resposta[i].numero;
+                    agencia.textContent = resposta[i].agencia;
+                    numconta.textContent = resposta[i].numconta;
+
+                    if (resposta[i].tipo == "0") {
+                        tipo.textContent = "Corrente";
+                    } else if (resposta[i].tipo == "1") {
+                        tipo.textContent = "Poupança";
+                    } else if (resposta[i].tipo == "2") {
+                        tipo.textContent = "Especial";
+                    } else {
+                        tipo.textContent = "Tipo inválido";
+                    }
+
+                    //tipo.textContent = resposta[i].tipo;
+                    saldo.textContent = resposta[i].saldo;
+                //    titular.textContent = resposta[i].titular.nome;
+                //    cpf.textContent = resposta[i].titular.cpf;
+                //    telefone.textContent = resposta[i].titular.telefone;
+                //    email.textContent = resposta[i].titular.email;
+
+                    document.getElementById('tabcad').appendChild(conta);
+                }
+            }
+        }
+        //A execução do script CONTINUARÁ mesmo que a requisição não tenha retornado do servidor
+    xhttp.send();
+</script>
+
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon/favicon-32x32.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Banco Gama Air Force - Cadastro</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+
+            <ul class="topnav">
+                <li><img class="logomenu" src="imagens/logo.png" alt="" srcset="" width="50px"></li>
+                <li><a class="active" href="index.html">Cadastro</a></li>
+                <li><a href="consulta.html">Consultar conta</a></li>
+                <li><a href="listcontas.html">Lista de Contas</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <div class="blocogeral">
+        <div class="bloco1">
+           <div class="logoprincipal"><img src="imagens/logo.png" alt="" srcset="" width="300px"></div>
+            <h1 class="boavinda">            
+           Seja bem vindo! Faça o seu cadastro<br>
+                e seja o nosso cliente</h1>
+            <form class="form" name="register" action="" id="registerform">
+                <!-- SECTION 1 -->
+                <section>
+                    <div>
+                        <h3 class="form-row1">CADASTRO DE CLIENTE</h3>
+                    </div>
+                    <div class="form-row">
+                        <label for="">
+                            Nome
+                        </label>
+                        <div class="form-holder">
+                            <input autocomplete="off" type="text" class="form-control" id="nome" name="nome" maxlength="200" placeholder="Nome Completo">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="">
+                            CPF
+                        </label>
+                        <div class="form-holder">
+                            <input autocomplete="off" type="text" class="form-control" placeholder="000.000.000-00" id="cpf" name="cpf" maxlength="14" onblur="validarCPF(this)" onkeyup="maskManager(this, maskCPF)">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="">
+                            Telefone
+                        </label>
+                        <div class="form-holder">
+                            <input autocomplete="off" type="text" class="form-control" id="telefone" name="telefone" maxlength="15" onkeyup="maskManager(this, maskTel)" placeholder="(00) 00000-0000">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="">
+                            Email
+                        </label>
+                        <div class="form-holder">
+                            <input autocomplete="off" type="email" class="form-control" id="email" name="email" maxlength="50" placeholder="seuemail@email.com.br">
+                        </div>
+                    </div>
+                </section>
+                <!-- FIM SECTION 1 -->
+        
+                 <!-- SECTION 2 -->
+                <h4></h4>
+                <section>
+                    <div class="form-row">
+                        <h3>CADASTRO DE CONTA</h3>
+                    </div>
+                    <div class="form-row">
+                        <label for="">
+                            Agência
+                        </label>
+                        <div class="form-holder">
+                            <input autocomplete="off" type="text" class="form-control" id="agencia" name="agencia" maxlength="4" placeholder="Nº da agência">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="">
+                            Conta
+                        </label>
+                        <div class="form-holder">
+                            <input autocomplete="off" type="text" class="form-control" id="numconta" name="numconta" maxlength="6" placeholder="Nº da conta">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="">
+                            Tipo de Conta
+                        </label>
+                        <div class="form-holder">
+                            <select class="form-control" name="tipo" id="tipo">
+                                <option value="Selecione" class="option" selected>Selecione</option>
+                                <option value="0" class="option">Conta Corrente</option>
+                                <option value="1" class="option">Poupança</option>
+                                <option value="2" class="option">Especial</option>
+                            </select>
+                            <i class="zmdi zmdi-caret-down"></i>
+                        </div>
+                    </div>
+                </section>
+                <!-- FIM DO SECTION 2-->
+                  <!-- SECTION 3 -->
+                <h4></h4>
+                <section>
+                    <div class="form-row">
+                        <h3>CADASTRO DE SALDO</h3>
+                    </div>
+                    <!--  <div class="form-row">
+                            <label for="">
+                                Titular
+                            </label>
+                            <div class="form-holder">
+                                <input autocomplete="off" type="text" class="form-control" name="cod_cliente" id="cod_cliente">
+                            </div>
+                        </div>  -->
+                    <div class="form-row">
+                        <label for="">
+                            Saldo
+                        </label>
+                        <div class="form-holder">
+                            <input autocomplete="off" type="text" class="form-control" name="saldo" id="saldo">
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+                <input class="btn-submit" type="submit" id="submit" value="Verificar" onclick="verificar()">
+            </form>  
+   
+        </div> 
+  
+    </div> 
+    <video autoplay muted loop class="myVideo">
+        <source src="video/planodefundo.mp4" type="video/mp4"> 
+    </video>
+ <!-- JQUERY STEP -->
+ <script src="js/jquery.steps.js"></script>
+
+ <!-- DATE-PICKER -->
+ <script src="vendor/date-picker/js/datepicker.js"></script>
+ <script src="vendor/date-picker/js/datepicker.en.js"></script>
+
+ <script src="js/main.js"></script>
+ <script type="text/javascript" src='js/script.js'></script>
+ <!-- Template created and distributed by Colorlib -->
+  
+</body>
+
+</html>

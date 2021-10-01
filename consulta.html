@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon/favicon-32x32.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Banco Gama Air Force - Consultar Conta</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+
+            <ul class="topnav">
+                <li><img class="logomenu" src="imagens/logo.png" alt="" srcset="" width="50px"></li>
+                <li><a href="index.html">Cadastro</a></li>
+                <li><a class="active" href="consulta.html">Consultar conta </a></li>
+                <li><a href="listcontas.html">Lista de Contas</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Consultar Conta</h1>
+        <br><br>
+        <div class="quadro">
+
+            <form>
+                <label for="">Digite o número da conta</label>
+
+                <input type="text" class="form-control" name="meuid" id="meuid" placeholder="Digite o número da conta" autocomplete="off">
+
+                <button type="button" onclick="consultaporid()" class="form-control">Consultar</button>
+
+            </form>
+
+        </div>
+        <br>
+        <div class="center">
+            <div id="consultaid">
+            </div>
+        </div>
+        <!--   <div class="container">
+        <h1>Consulta - Banco Itaú</h1>
+        <br />
+        <table>
+            <thead>
+                <tr>
+                    <th>Titular</th>
+                    <th>Agência</th>
+                    <th>Conta</th>
+                    <th>Tipo</th>
+                    <th>Saldo</th>
+                    <th>CPF</th>
+                    <th>Celular</th>
+                    <th>Email</th>
+                </tr>
+            <tbody id="consultaid">
+            </tbody>
+            </thead>
+        </table>
+    </div>-->
+    </div>
+    <video autoplay muted loop class="myVideo">
+        <source src="video/planodefundo.mp4" type="video/mp4">
+      </video>
+
+
+    <script type="text/javascript">
+        function consultaporid() {
+
+            //Sua URL
+            var consulta = document.getElementById("meuid").value;
+            var url = "http://localhost:8080/contas/" + consulta; // Funciona?
+
+            // Criando o objeto apartir da classe responsável por pegar os dados
+            var xhttp = new XMLHttpRequest();
+            // Chamando o método de configuração, para passar o tipo de requisicao(aqui é GET) e a url
+            xhttp.open("GET", url, true);
+
+            // Esta é uma função assíncrona, que é caracteristico do JavaScript
+            //Função a ser chamada quando a requisição retornar do servidor
+            xhttp.onreadystatechange = function() {
+                    //Verifica se o retorno do servidor deu certo
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        console.log(xhttp.responseText);
+                        var resposta = JSON.parse(xhttp.responseText);
+
+                        let conta = document.createElement("div");
+                        let numero = document.createElement("p");
+                        let titular = document.createElement("p");
+                        let cpf = document.createElement("p");
+                        let telefone = document.createElement("p");
+                        let email = document.createElement("p");
+                        let agencia = document.createElement("p");
+                        let numconta = document.createElement("p");
+                        let tipo = document.createElement("p");
+                        let saldo = document.createElement("p");
+
+                        conta.appendChild(numero);
+                        conta.appendChild(titular);
+                        conta.appendChild(cpf);
+                        conta.appendChild(telefone);
+                        conta.appendChild(email);
+                        conta.appendChild(agencia);
+                        conta.appendChild(numconta);
+                        conta.appendChild(tipo);
+                        conta.appendChild(saldo);
+
+                        numero.textContent = "Número ID: " + resposta.numero;
+                        titular.textContent = "Nome: " + resposta.titular.nome;
+                        cpf.textContent = "CPF: " + resposta.titular.cpf;
+                        telefone.textContent = "Telefone: " + resposta.titular.telefone;
+                        email.textContent = "E-mail: " + resposta.titular.email;
+                        agencia.textContent = "Agência: " + resposta.agencia;
+                        numconta.textContent = "Conta: " + resposta.numconta;
+                        if (resposta.tipo == "0") {
+                            tipo.textContent = "Tipo de Conta: Corrente";
+                        } else if (resposta.tipo == "1") {
+                            tipo.textContent = "Tipo de Conta: Poupança";
+                        } else if (resposta.tipo == "2") {
+                            tipo.textContent = "Tipo de Conta: Especial";
+                        } else {
+                            tipo.textContent = "Tipo inválido";
+                        }
+
+                        // tipo.textContent = resposta.tipo;
+                        saldo.textContent = "Saldo: R$" + resposta.saldo;
+                        document.createElement("br");
+                        document.createElement("br");
+                        document.getElementById('consultaid').style.border = " 1px solid #fff";
+                        document.getElementById('consultaid').style.borderRadius = "10px";
+                        document.getElementById('consultaid').style.position = "relative";
+                        document.getElementById('consultaid').style.background = "rgba(255, 255, 255, 0.1)";
+                        document.getElementById('consultaid').style.display = "flex";
+                        document.getElementById('consultaid').style.alignItems = "space-around";
+                        document.getElementById('consultaid').style.justifyContent = "space-around";
+                        document.getElementById('consultaid').style.padding = "10px";
+
+                        document.getElementById('consultaid').appendChild(conta);
+                    }
+                }
+                //A execução do script CONTINUARÁ mesmo que a requisição não tenha retornado do servidor
+            xhttp.send();
+            var inputVal = document.getElementById("meuid").value;
+        }
+    </script>
+
+</body>
+
+</html>
